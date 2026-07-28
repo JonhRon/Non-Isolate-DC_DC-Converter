@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{siunitx}
+\usepackage{booktabs}
+
+\begin{document}
+
+% \begin{table}[h]
+% \centering
+% \caption{Key Parameters for IRF530 MOSFET}
+% \label{tab:IRF530}
+% \begin{tabular}{lccc}
+% \toprule
+% \textbf{Parameter} & \textbf{Symbol} & \textbf{Value} & \textbf{Test Conditions} \\
+% \midrule
+% Drain-Source Voltage & $V_{DS}$ & \SI{100}{\volt} & Absolute Maximum Rating \\
+% Drain Current (Continuous) & $I_D$ & \SI{14}{\ampere} & $T_C = \SI{25}{\celsius}$ \\
+%  &  & \SI{10}{\ampere} & $T_C = \SI{100}{\celsius}$ \\
+% Drain-Source On-Resistance & $R_{DS(on)}$ & \SI{0.16}{\ohm} & $V_{GS} = \SI{10}{\volt}, I_D = \SI{8.4}{\ampere}$ \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+
+\begin{table}[h]
+    \centering
+    \caption{Key Parameters for IRF530 MOSFET}
+    \label{tab:IRF530}
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Parameter} & \textbf{Value} & \textbf{Test Conditions} \\
+    \midrule
+     $V_{DS}$ & \SI{100}{\volt} & Absolute Maximum Rating \\
+     $I_D$ & \SI{14}{\ampere} & $T_C = \SI{25}{\celsius}$ \\
+     & \SI{10}{\ampere} & $T_C = \SI{100}{\celsius}$ \\
+     $R_{DS(on)}$ & \SI{0.16}{\ohm} & $V_{GS} = \SI{10}{\volt}, I_D = \SI{8.4}{\ampere}$ \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
+    \begin{table}[h]
+        \centering
+        \caption{Key Parameters for SR510 Schottky Diode}
+        \label{tab:SR510}
+        \begin{tabular}{lcc}
+        \toprule
+        \textbf{Parameter} & \textbf{Value} & \textbf{Test Conditions} \\
+        \midrule
+        $V_{RRM}$ & \SI{100}{\volt} & Maximum repetitive rating \\
+        $I_F$ & \SI{5}{\ampere} & Continuous, $T_A = \SI{25}{\celsius}$ \\
+        \bottomrule
+        \end{tabular}
+        \end{table}
+\end{document}

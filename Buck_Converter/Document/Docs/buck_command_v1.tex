@@ -1,0 +1,121 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section*{Flyback Converter Power Stage Calculation}
+
+Given parameters:
+\begin{itemize}
+    \item Input Voltage: \( V_{\text{in}} =  30V\)
+    \item Output Voltage: \(V_{\text{out}} = 24V\)
+    \item Output Power: \(P_{\text{out}} = 120W\)
+    \item Switching Frequency: \(F_\text{s} = 100KHz\)
+    \item Ripple Current Rate: \(30\%\)
+    \item Ripple Voltage Rate: \(1\%\)
+\end{itemize}
+\subsubsection*{$\bullet$ Calculate Duty Cycle}
+\subsubsection*{$\bullet$ Calculate Output Current}
+\subsubsection*{$\bullet$ Calculate Output Resistance}
+\subsubsection*{$\bullet$ Calculate Ripple Current, Maximum and Minimum Ripple Current }
+\subsubsection*{$\bullet$ Calculate Ripple Voltage}
+\subsubsection*{$\bullet$ Calculate Cpacitor}
+\subsubsection*{$\bullet$ Calculate Inductor}
+\subsubsection*{$\bullet$ Calculate Selection of Mosfet}
+\subsubsection*{$\bullet$ Calculate Selection of Diode}
+% c{V_{\subsection*{1. Determine The Transformer Turn Ratio}
+% The transformer turn ratio \( N \) is given by:
+% \[
+% N = \frac{V_{\text{in}} \cdot D}{V_{\text{out}} \cdot (1 - D)}
+% \]
+
+% \subsection*{2. Output Current}
+% The output current \( I_{\text{out}} \) is calculated as:
+% \[
+% I_{\text{out}} = \frac{P_{\text{out}}}{V_{\text{out}}}
+% \]
+
+% \subsection*{3. Output Power Load (Resistance)}
+% The output load resistance \( R_{\text{out}} \) is:
+% \[
+% R_{\text{out}} = \frac{V_{\text{out}}^2}{P_{\text{out}}}
+% \]
+
+% \subsection*{4. Determine the Ripple Current}
+% The ripple current \( \Delta I_L \) is:
+% \[
+% \Delta I_L = \Delta I_{\text{ripple}} \cdot I_{\text{out}}
+% \]
+
+% \subsection*{5. Determine the Magnetizing Inductor}
+% The magnetizing inductance \( L_m \) is:
+% \[
+% L_m = \fra\text{in}} \cdot D}{\Delta I_L \cdot f_{\text{sw}}}
+% \]
+
+% \subsection*{6. Determine The Magnetizing Ripple Current (Maximum, Minimum, Average)}
+% The maximum, minimum, and average magnetizing ripple currents are:
+% \[
+% I_{L,\text{max}} = I_{\text{out}} + \frac{\Delta I_L}{2}, \quad
+% I_{L,\text{min}} = I_{\text{out}} - \frac{\Delta I_L}{2}, \quad
+% I_{L,\text{avg}} = I_{\text{out}}
+% \]
+
+% \subsection*{7. Determine The Ripple Voltage}
+% The ripple voltage \( \Delta V_{\text{out}} \) is:
+% \[
+% \Delta V_{\text{out}} = \Delta V_{\text{ripple}} \cdot V_{\text{out}}
+% \]
+
+% \subsection*{8. Determine the Output Capacitor}
+% The output capacitor \( C_{\text{out}} \) is:
+% \[
+% C_{\text{out}} = \frac{\Delta I_L}{8 \cdot f_{\text{sw}} \cdot \Delta V_{\text{out}}}\]
+
+% \subsection*{9. Select MOSFET and Diode}
+% Select MOSFET and diode based on voltage and current ratings.
+
+% \subsection*{10. Calculate the Transformer Design Using \( K_g \) Method (Unit: \si{\centi\meter^5})}
+% The \( K_g \) method is used to design the transformer core.
+% $$K_g \geq \frac{\rho L^2 I_{\text{max}}^2}{B_{\text{max}}^2 R K_u} \cdot 10^8 \quad (\text{in cm}^5)$$
+% \begin{itemize}
+%     \item \(B_{max} = 0.3T\)
+%     \item \(R = 0.1\Omega\)
+%     \item \(K_u = 0.4\)
+% \end{itemize}
+% %Select an appropriate EE core type based on the calculated \( K_g \) value.
+
+% \subsection*{11. Gap Length (Unit: \si{\milli\meter})}
+% The gap length \( l_g \) is:
+% \[
+% l_g = \frac{\mu_0 L I_{M,\text{max}}^2}{B_{\text{max}}^2 A_c} \cdot 10^4 \quad (\text{in meters})
+% \]
+% where \( \mu_0 \) is the permeability of free space.
+
+% \subsection*{12. Calculate Number of Transformer Primary and Secondary Turns}
+% The number of primary turns \( N_p \) and secondary turns \( N_s \) are:
+% $$n = \frac{L_m I_{\text{max}}}{B_{\text{max}} A_c} \cdot 10^4$$
+% where \( B_{\text{max}} \) is the maximum flux density and \( A_e \) is the core cross-sectional area.
+
+% \subsection*{13. Calculate the  Wire Area for the Transformer Primary and Secondary (Unit: \si{\milli\meter^2})}
+% allocate window area between windings
+% \[I_{tot} = I_1 + \frac{n_2}{n_1}I_2\]
+% \[\alpha_1 = \frac{n_1 I_{\text{tot}}}{n_1 I_1}\]
+% The wire area \( A_w \) is:
+% \[
+% A_w \leq \frac{\alpha K_u W_A}{n}
+% \]
+% where \( I_{\text{rms}} \) is the RMS current and \( J \) is the current density.
+
+
+
+% \subsection*{14. Calculate the Primary Winding Inductance Value and Secondary Inductance Value of the Transformer}
+% The primary inductance \( L_p \) and secondary inductance \( L_s \) are:
+% \[
+% L_p = \frac{N_p^2}{R_c}, \quad
+% L_s = \frac{N_s^2}{R_c}
+% \]
+% where \( R_c \) is the core reluctance.
+
+\end{document}

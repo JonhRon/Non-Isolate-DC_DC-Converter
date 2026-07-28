@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section*{Ferrite Core Selection Using the \( K_g \) Method}
+
+\subsection*{Input Parameters}
+\begin{align*}
+L &= \SI{34.9e-6}{\henry} & &\text{(Inductance)} \\
+I_o &= \SI{4.583}{\ampere} & &\text{(DC Current)} \\
+\Delta I &= \SI{1.375}{\ampere} & &\text{(AC Ripple Current)} \\
+P_o &= \SI{110}{\watt} & &\text{(Output Power)} \\
+\alpha &= 1\% & &\text{(Regulation)} \\
+f_s &= \SI{100e3}{\hertz} & &\text{(Switching Frequency)} \\
+B_m &= \SI{0.25}{\tesla} & &\text{(Operating Flux Density)} \\
+K_u &= 0.4 & &\text{(Window Utilization)} \\
+T_r &= \SI{25}{\celsius} & &\text{(Temperature Rise Goal)}
+\end{align*}
+
+\subsection*{Calculations}
+\begin{enumerate}
+\item \textbf{Peak Current (\( I_{\text{pk}} \))}:
+\[
+I_{\text{pk}} = I_o + \frac{\Delta I}{2} = 4.583 + \frac{1.375}{2} = \SI{5.27}{\ampere}
+\]
+
+\item \textbf{Energy-Handling Capability (\( E \))}:
+\[
+E = \frac{1}{2} L I_{\text{pk}}^2 = \frac{1}{2} \cdot 34.9 \times 10^{-6} \cdot (5.27)^2 = \SI{4.87e-4}{\joule}
+\]
+
+\item \textbf{Electrical Condition Coefficient (\( K_e \))}:
+\[
+K_e = 0.145 \cdot P_o \cdot B_m^2 \cdot 10^{-4} = 0.145 \cdot 110 \cdot (0.25)^2 \cdot 10^{-4} = \num{9.96e-5}
+\]
+
+\item \textbf{Core Geometry Coefficient (\( K_g \))}:
+\[
+K_g = \frac{E^2}{K_e \cdot \alpha} = \frac{(4.87 \times 10^{-4})^2}{9.96 \times 10^{-5} \cdot 1} = \num{2.38e-3}
+\]
+\end{enumerate}
+
+\subsection*{Notes}
+\begin{itemize}
+\item \( K_g \) determines the minimum core size required
+\item Select a ferrite core with \( K_g \geq \num{2.38e-3} \, \text{cm}^5 \)
+\item Verify core saturation at \( B_m = \SI{0.25}{\tesla} \)
+\end{itemize}
+
+\end{document}

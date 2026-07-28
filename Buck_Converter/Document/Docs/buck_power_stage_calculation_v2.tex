@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Buck Converter Power Stage Design}
+\author{}
+\date{}
+\maketitle
+
+\section*{Given Parameters}
+\begin{itemize}
+    \item Input Voltage: \( V_{in} = 30\,\text{V} \)
+    \item Output Voltage: \( V_{out} = 24\,\text{V} \)
+    \item Output Power: \( P_{out} = 120\,\text{W} \)
+    \item Switching Frequency: \( F_s = 100\,\text{kHz} \)
+    \item Ripple Current Rate: \( 30\% \)
+    \item Ripple Voltage Rate: \( 1\% \)
+\end{itemize}
+
+\section*{Calculations}
+\subsection*{1. Duty Cycle (\(D\))}
+\[
+D = \frac{V_{out}}{V_{in}} = \frac{24\,\text{V}}{30\,\text{V}} = 0.8 \quad (80\%)
+\]
+
+\subsection*{2. Output Current (\(I_{out}\))}
+\[
+I_{out} = \frac{P_{out}}{V_{out}} = \frac{120\,\text{W}}{24\,\text{V}} = 5\,\text{A}
+\]
+
+\subsection*{3. Output Resistance (\(R_{out}\))}
+\[
+R_{out} = \frac{V_{out}}{I_{out}} = \frac{24\,\text{V}}{5\,\text{A}} = 4.8\,\Omega
+\]
+
+\subsection*{4. Ripple Current (\(\Delta I_L\))}
+\begin{align*}
+\Delta I_L &= 0.3 \times I_{out} = 0.3 \times 5\,\text{A} = 1.5\,\text{A (peak-to-peak)} \\
+I_{L_{\text{max}}} &= I_{out} + \frac{\Delta I_L}{2} = 5\,\text{A} + 0.75\,\text{A} = 5.75\,\text{A} \\
+I_{L_{\text{min}}} &= I_{out} - \frac{\Delta I_L}{2} = 5\,\text{A} - 0.75\,\text{A} = 4.25\,\text{A}
+\end{align*}
+
+\subsection*{5. Inductor (\(L\))}
+\[
+L = \frac{V_{out} \cdot (V_{in} - V_{out})}{V_{in} \cdot F_s \cdot \Delta I_L} = \frac{24 \cdot (30 - 24)}{30 \cdot 100\,\text{kHz} \cdot 1.5} = 32\,\mu\text{H}
+\]
+\textbf{Selection}: \(33\,\mu\text{H}\) inductor with saturation current \(> 5.75\,\text{A}\).
+
+\subsection*{6. Ripple Voltage (\(\Delta V_{out}\))}
+\[
+\Delta V_{out} = 1\% \times V_{out} = 0.24\,\text{V}
+\]
+
+\subsection*{7. Output Capacitor (\(C\))}
+\[
+C = \frac{\Delta I_L \cdot D}{8 \cdot F_s \cdot \Delta V_{out}} = \frac{1.5 \cdot 0.8}{8 \cdot 100\,\text{kHz} \cdot 0.24} = 6.25\,\mu\text{F}
+\]
+\textbf{Selection}: \(10\,\mu\text{F}\), \(35\,\text{V}\), low-ESR ceramic or polymer capacitor.
+
+\subsection*{8. MOSFET Selection}
+\begin{itemize}
+    \item Voltage Rating: \(> 30\,\text{V}\) (choose \(50\,\text{V}\) for margin)
+    \item Current Rating: \(> 5.75\,\text{A}\) (peak current)
+    \item \textbf{Recommendation}: IRF540N (\(50\,\text{V}\), \(22\,\text{A}\), low \(R_{DS(on)}\))
+\end{itemize}
+
+\subsection*{9. Diode Selection}
+\begin{itemize}
+    \item Voltage Rating: \(> 30\,\text{V}\) (choose \(40\,\text{V}\) for margin)
+    \item Current Rating: \(> 5.75\,\text{A}\) (peak current)
+    \item \textbf{Recommendation}: SB1045 (\(40\,\text{V}\), \(10\,\text{A}\) Schottky diode)
+\end{itemize}
+
+\section*{Component Summary}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Component} & \textbf{Value/Part Number} \\
+\hline
+Inductor & \(33\,\mu\text{H}\), \(7\,\text{A}\) saturation \\
+Capacitor & \(10\,\mu\text{F}\), \(35\,\text{V}\), X7R/Ceramic \\
+MOSFET & IRF540N (\(50\,\text{V}\), \(22\,\text{A}\)) \\
+Diode & SB1045 (\(40\,\text{V}\), \(10\,\text{A}\)) \\
+\hline
+\end{tabular}
+
+\end{document}

@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\begin{document}
+
+\section*{EE16 Ferrite Core Design Calculations}
+
+\subsection*{Core Parameters}
+\begin{align*}
+MPL &= \SI{3.45}{\centi\meter} & &\text{(Magnetic Path Length)} \\
+We &= \SI{3.29}{\gram} & &\text{(Core Weight)} \\
+MLT &= \SI{3.40}{\centi\meter} & &\text{(Mean Length per Turn)} \\
+A_c &= \SI{0.19}{\centi\meter\squared} & &\text{(Cross-Sectional Area)} \\
+W_a &= \SI{0.19}{\centi\meter\squared} & &\text{(Window Area)} \\
+A_p &= A_c \cdot W_a = \SI{0.0361}{\centi\meter\tothe{4}} & &\text{(Core Product)} \\
+K_g &= \SI{2.02e-3}{\centi\meter\tothe{5}} & &\text{(Core Geometry)}
+\end{align*}
+
+\subsection*{Design Calculations}
+
+\subsubsection*{1. Current Density (\( J \))}
+\[
+J = \frac{2E \cdot 10^4}{B_m \cdot A_p \cdot K_u} 
+  = \frac{2 \cdot 4.87 \times 10^{-4} \cdot 10^4}{0.25 \cdot 0.0361 \cdot 0.4} 
+  = \frac{9.74}{0.00361} 
+  \approx \SI{2698}{\ampere\per\centi\meter\squared}
+\]
+
+\subsubsection*{2. RMS Current (\( I_{\text{RMS}} \))}
+\[
+I_{\text{RMS}} = \sqrt{I_o^2 + (\Delta I)^2} 
+  = \sqrt{4.583^2 + 1.375^2} 
+  = \sqrt{21.00 + 1.89} 
+  \approx \SI{4.785}{\ampere}
+\]
+
+\subsubsection*{3. Bare Wire Area (\( A_w \))}
+\[
+A_w = \frac{I_{\text{RMS}}}{J} 
+  = \frac{4.785}{2698} 
+  \approx \SI{0.00177}{\centi\meter\squared}
+\]
+$\bullet$ Selected Bare Wire Area:
+\[
+    A_ws = \SI{0.003}{\centi\meter\squared}
+\]
+\subsubsection*{4. Effective Window Area (\( W_{\text{aeff}} \))}
+\[
+W_{\text{aeff}} = W_a \cdot S_3 
+  = 0.19 \cdot 0.75 
+  = \SI{0.1425}{\centi\meter\squared}
+\]
+
+\subsubsection*{5. Number of Turns (\( N \))}
+\[
+N = \frac{W_{\text{aeff}} \cdot S_2}{A_{\text{ws}}} 
+  = \frac{0.1425 \cdot 0.6}{0.003} 
+  = \frac{0.0855}{0.003} 
+  = 28.5 \approx \boxed{29 \, \text{turns}}
+\]
+
+\subsubsection*{6. Required Air Gap (\( L_g \))}
+\[
+L_g = \frac{0.4\pi N^2 A_c \cdot 10^{-8}}{L} - \frac{MPL}{\mu_0}
+\]
+Substituting values:
+\[
+L_g = \frac{0.4\pi \cdot 29^2 \cdot 0.19 \cdot 10^{-8}}{34.9 \times 10^{-6}} - \frac{3.45}{2500}
+\]
+\[
+= \frac{0.4\pi \cdot 841 \cdot 0.19 \cdot 10^{-8}}{34.9 \times 10^{-6}} - 0.00138
+\]
+\[
+= \frac{0.4 \cdot 3.1416 \cdot 160.0 \cdot 10^{-8}}{34.9 \times 10^{-6}} - 0.00138
+\]
+\[
+= \frac{2.01 \times 10^{-6}}{34.9 \times 10^{-6}} - 0.00138
+\]
+\[
+= 0.0576 - 0.00138 \approx \SI{0.0562}{\centi\meter}
+\]
+
+\subsection*{Design Notes}
+\begin{itemize}
+\item Use \textbf{AWG 30} wire (\( A_w \approx \SI{0.00177}{\centi\meter\squared} \))
+\item Verify core saturation: \( B_{\text{sat}} > \SI{0.25}{\tesla} \)
+\item Gap tolerance: Maintain \( \pm 0.001\, \text{cm} \) precision
+\item Thermal check: Ensure \( T_r \leq \SI{25}{\celsius} \) rise
+\end{itemize}
+
+\end{document}

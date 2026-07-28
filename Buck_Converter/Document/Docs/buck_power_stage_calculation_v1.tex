@@ -1,0 +1,99 @@
+-------------------------------------------------------------------------------------------9----------+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{booktabs}
+
+\begin{document}
+
+\section*{Flyback Converter Power Stage Calculation}
+
+\subsection*{Given Parameters}
+\begin{itemize}
+    \item Input Voltage: \( V_{in} = 30\, \text{V} \)
+    \item Output Voltage: \( V_{out} = 24\, \text{V} \)
+    \item Output Power: \( P_{out} = 110\, \text{W} \)
+    \item Switching Frequency: \( f_{sw} = 100\, \text{kHz} \)
+    \item Ripple Current Rate: \( 30\% \) of \( I_{out} \)
+    \item Ripple Voltage Rate: \( 1\% \) of \( V_{out} \)
+\end{itemize}
+
+\subsection*{Calculations}
+
+\subsubsection*{1. Duty Cycle (\( D \))}
+\[
+D = \frac{V_{out}}{V_{in}} = \frac{24}{30} = \boxed{0.8 \, (80\%)}
+\]
+
+\subsubsection*{2. Output Current (\( I_{out} \))}
+\[
+I_{out} = \frac{P_{out}}{V_{out}} = \frac{110}{24} \approx \boxed{4.583\, \text{A}}
+\]
+
+\subsubsection*{3. Output Resistance (\( R \))}
+\[
+R = \frac{V_{out}}{I_{out}} = \frac{24}{4.583} \approx \boxed{5.236\, \Omega}
+\]
+
+\subsubsection*{4. Ripple Current (\( \Delta I_L \))}
+\[
+\Delta I_L = 30\% \times I_{out} = 0.3 \times 4.583 \approx \boxed{1.375\, \text{A (peak-to-peak)}}
+\]
+
+\subsubsection*{5. Maximum/Minimum Inductor Current}
+\[
+I_{L_{\text{max}}} = I_{out} + \frac{\Delta I_L}{2} = 4.583 + 0.6875 \approx \boxed{5.27\, \text{A}}  
+\]
+\[
+I_{L_{\text{min}}} = I_{out} - \frac{\Delta I_L}{2} = 4.583 - 0.6875 \approx \boxed{3.896\, \text{A}}
+\]
+
+\subsubsection*{6. Ripple Voltage (\( \Delta V_{out} \))}
+\[
+\Delta V_{out} = 1\% \times V_{out} = 0.01 \times 24 = \boxed{0.24\, \text{V (peak-to-peak)}}
+\]
+
+\subsubsection*{7. Output Capacitor (\( C \))}
+\[
+C = \frac{I_{out} \cdot D}{f_{sw} \cdot \Delta V_{out}} = \frac{4.583 \cdot 0.8}{100,000 \cdot 0.24} \approx \boxed{152.8\, \mu\text{F}}
+\]
+
+\subsubsection*{8. Inductor (\( L \))}
+\[
+L = \frac{(V_{in} - V_{out}) \cdot D}{f_{sw} \cdot \Delta I_L} = \frac{(30 - 24) \cdot 0.8}{100,000 \cdot 1.375} \approx \boxed{34.9\, \mu\text{H}}
+\]
+
+\subsubsection*{9. MOSFET Selection}
+\begin{itemize}
+    \item Voltage Rating: \( \geq 40\, \text{V} \)
+    \item Current Rating: \( \geq 8\, \text{A} \)
+\end{itemize}
+
+\subsubsection*{10. Diode Selection}
+\begin{itemize}
+    \item Voltage Rating: \( \geq 40\, \text{V} \)
+    \item Current Rating: \( \geq 5\, \text{A} \)
+\end{itemize}
+
+\subsection*{Summary Table}
+\begin{tabular}{ll}
+    \toprule
+    \textbf{Parameter} & \textbf{Value} \\
+    \midrule
+    Duty Cycle & \( 80\% \, (0.8) \) \\
+    Output Current & \( 4.583\, \text{A} \) \\
+    Output Resistance & \( 5.236\, \Omega \) \\
+    Ripple Current & \( 1.375\, \text{A (p-p)} \) \\
+    Inductor Current (Max/Min) & \( 5.27\, \text{A} / 3.896\, \text{A} \) \\
+    Ripple Voltage & \( 0.24\, \text{V (p-p)} \) \\
+    Output Capacitor & \( 152.8\, \mu\text{F} \) \\
+    Inductor & \( 34.9\, \mu\text{H} \) \\
+    \bottomrule
+\end{tabular}
+
+\subsection*{Notes}
+\begin{itemize}
+    \item The calculations assume a \textbf{buck converter topology}, though the title mentions a \textbf{flyback converter}. Flyback designs require additional parameters (e.g., transformer turns ratio).
+    %\item Use components with \(≥20\%\) margin for voltage/current ratings.
+    \item Thermal management is critical for MOSFET and diode.
+\end{itemize}
+
+\end{document}
