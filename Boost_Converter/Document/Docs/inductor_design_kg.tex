@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{units}
+
+\begin{document}
+	
+	\section*{Ferrite Core Selection Using \(K_g\) Method}
+	
+	\subsection*{Input Parameters}
+	\begin{itemize}
+		\item Inductance (\(L\)): \(20 \, \mu\text{H}\)
+		\item DC Current (\(I_o\)): \(10 \, \text{A}\)
+		\item AC Current (\(\Delta I\)): \(3 \, \text{A}\)
+		\item Output Power (\(P_o\)): \(120 \, \text{W}\)
+		\item Regulation (\(\alpha\)): \(1\%\) 
+		\item Switching Frequency (\(F_s\)): \(100 \, \text{kHz}\)
+		\item Operating Flux Density (\(B_m\)): \(0.25 \, \text{T}\)
+		\item Window Utilization (\(K_u\)): \(0.4\)
+		\item Temperature Rise Goal (\(T_r\)): \(25^\circ\text{C}\)
+	\end{itemize}
+	
+	\subsection*{Calculations}
+	
+	\subsubsection*{1. Peak Current (\(I_{pk}\))}
+	\[
+	I_{pk} = I_o + \frac{\Delta I}{2} = 10 + \frac{3}{2} = \boxed{11.5 \, \text{A}} \quad [[4]]
+	\]
+	
+	\subsubsection*{2. Energy-Handling Capability (\(E\))}
+	\[
+	E = \frac{1}{2} L I_{pk}^2 = \frac{1}{2} \cdot 20 \times 10^{-6} \cdot (11.5)^2 \approx \boxed{0.00132 \, \text{W-s}} \quad [[3]]
+	\]
+	
+	\subsubsection*{3. Electrical Condition Coefficient (\(K_e\))}
+	\[
+	K_e = 0.145 \cdot P_o \cdot B_m^2 \cdot 10^{-4} = 0.145 \cdot 120 \cdot (0.25)^2 \cdot 10^{-4} \approx \boxed{2.175 \times 10^{-5}} \quad [[4]]
+	\]
+	
+	\subsubsection*{4. Core Geometry Coefficient (\(K_g\))}
+	\[
+	K_g = \frac{E^2}{K_e \cdot \alpha} = \frac{(0.00132)^2}{2.175 \times 10^{-5} \cdot 1} \approx \boxed{0.0805 \, \text{cm}^5} \quad [[5]][[6]]
+	\]
+	
+	\subsection*{Core Selection Criteria}
+	Select a ferrite core with:  
+	\[
+	K_g \geq 0.0805 \, \text{cm}^5 \quad \text{(from manufacturer datasheets)} \quad [[7]]
+	\]
+	
+	\subsection*{Summary of Results}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Parameter} & \textbf{Value} \\
+		\hline
+		Peak Current (\(I_{pk}\)) & \(11.5 \, \text{A}\) \\
+		Energy-Handling (\(E\)) & \(0.00132 \, \text{W-s}\) \\
+		Electrical Coefficient (\(K_e\)) & \(2.175 \times 10^{-5}\) \\
+		Core Geometry (\(K_g\)) & \(0.0805 \, \text{cm}^5\) \\
+		\hline
+	\end{tabular}
+	
+\end{document}

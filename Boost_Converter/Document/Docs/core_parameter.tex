@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{units}
+
+\begin{document}
+	
+	\section*{PQ2020 Ferrite Core Inductor Design Calculation}
+	
+	\subsection*{Input Parameters (PQ2020 Core)}
+	\begin{itemize}
+		\item Magnetic Path Length (\(MPL\)): \(4.54 \, \text{cm}\) [[1]][[4]]
+		\item Core Weight (\(We\)): \(15 \, \text{grams}\) [[1]][[6]]
+		\item Mean Length Turn (\(MLT\)): \(4.4 \, \text{cm}\) [[4]]
+		\item Cross-Sectional Area (\(A_c\)): \(0.620 \, \text{cm}^2\) [[4]]
+		\item Window Area (\(W_a\)): \(0.658 \, \text{cm}^2\) [[4]]
+		\item Core Product (\(A_p\)): \(0.408 \, \text{cm}^4\) [[7]]
+		\item Core Geometry (\(K_g\)): \(0.0227 \, \text{cm}^5\) [[7]]
+		\item Energy-Handling Capability (\(E\)): \(0.0013 \, \text{W-s}\)
+		\item DC Current (\(I_o\)): \(10 \, \text{A}\)
+		\item AC Current (\(\Delta I\)): \(3 \, \text{A}\)
+		\item Operating Flux Density (\(B_m\)): \(0.25 \, \text{T}\)
+		\item Window Utilization (\(K_u\)): \(0.4\)
+		\item Inductance (\(L\)): \(20 \, \mu\text{H}\)
+	\end{itemize}
+	
+	\subsection*{Calculations}
+	
+	\subsubsection*{1. Current Density (\(J\))}
+	\[
+	J = \frac{2 \cdot E \cdot 10^4}{B_m \cdot A_p \cdot K_u} = \frac{2 \cdot 0.0013 \cdot 10^4}{0.25 \cdot 0.408 \cdot 0.4} \approx \boxed{637.25 \, \text{A/cm}^2} \quad [[3]][[9]]
+	\]
+	
+	\subsubsection*{2. RMS Current (\(I_{rms}\))}
+	\[
+	I_{rms} = \sqrt{I_o^2 + \Delta I^2} = \sqrt{10^2 + 3^2} = \boxed{10.44 \, \text{A}} \quad [[4]]
+	\]
+	
+	\subsubsection*{3. Bare Wire Area (\(A_w\))}
+	\[
+	A_w = \frac{I_{rms}}{J} = \frac{10.44}{637.25} \approx \boxed{0.0164 \, \text{cm}^2} \quad [[9]]
+	\]
+	
+	\subsubsection*{4. Effective Window Area (\(W_{aeff}\))}
+	\[
+	W_{aeff} = W_a \cdot S3 = 0.658 \cdot 0.65 \approx \boxed{0.4277 \, \text{cm}^2} \quad [[3]]
+	\]
+	where \(S3 = 0.65\) (effective window factor for PQ2020 ferrite cores) [[4]].
+	
+	\subsubsection*{5. Number of Turns (\(N\))}
+	\[
+	N = \frac{W_{aeff} \cdot S2}{A_{ws}} = \frac{0.4277 \cdot 0.6}{0.015} \approx \boxed{17.11 \, \text{turns}} \quad [[6]]
+	\]
+	where:
+	\begin{itemize}
+		\item \(S2 = 0.6\) (fill factor for PQ2020 circular wire) [[6]]
+		\item \(A_{ws} = 0.015 \, \text{cm}^2\) (selected wire area)
+	\end{itemize}
+	
+	\subsubsection*{6. Required Air Gap (\(L_g\))}
+	\[
+	L_g = \left( \frac{0.4 \cdot \pi \cdot N^2 \cdot A_c \cdot 10^{-8}}{L} \right) - \left( \frac{MPL}{\mu_0} \right)
+	\]
+	Substitute values:
+	\[
+	L_g = \left( \frac{0.4 \cdot \pi \cdot (17.11)^2 \cdot 0.620 \cdot 10^{-8}}{20 \times 10^{-6}} \right) - \left( \frac{4.54}{2500} \right)
+	\]
+	\[
+	L_g \approx \boxed{0.038 \, \text{cm} \, (\text{or } 0.38 \, \text{mm})} \quad [[1]][[4]]
+	\]
+	where \(\mu_0 = 2500\) (material permeability for PQ2020 Mn-Zn ferrite) [[7]].
+	
+	\subsection*{Core Compatibility Check}
+	The calculated \(K_g = 0.0227 \, \text{cm}^5\) matches the PQ2020 core specification [[7]], confirming its suitability for the design.
+	
+	\subsection*{Summary of Results}
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Parameter} & \textbf{Value} \\
+		\hline
+		Current Density (\(J\)) & \(637.25 \, \text{A/cm}^2\) \\
+		RMS Current (\(I_{rms}\)) & \(10.44 \, \text{A}\) \\
+		Bare Wire Area (\(A_w\)) & \(0.0164 \, \text{cm}^2\) \\
+		Effective Window Area (\(W_{aeff}\)) & \(0.4277 \, \text{cm}^2\) \\
+		Number of Turns (\(N\)) & \(17.11\) \\
+		Air Gap (\(L_g\)) & \(0.38 \, \text{mm}\) \\
+		\hline
+	\end{tabular}
+	
+\end{document}

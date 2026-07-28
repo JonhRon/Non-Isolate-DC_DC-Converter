@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\title{Boost Converter Power Stage Design}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Given Parameters}
+\begin{itemize}[label=$\bullet$]
+    \item Input Voltage: \( V_{\text{in}} = 12 \, \text{V} \)
+    \item Output Voltage: \( V_{\text{out}} = 48 \, \text{V} \)
+    \item Output Power: \( P_{\text{out}} = 120 \, \text{W} \)
+    \item Switching Frequency: \( f_s = 100 \, \text{kHz} \)
+    \item Ripple Current Rate: \( 30\% \)
+    \item Ripple Voltage Rate: \( 1\% \)
+\end{itemize}
+
+\section*{1. Duty Cycle (\( D \))}
+\[
+D = 1 - \frac{V_{\text{in}}}{V_{\text{out}}} = 1 - \frac{12}{48} = \boxed{0.75 \, (75\%)}
+\]
+
+\section*{2. Output Current (\( I_{\text{out}} \))}
+\[
+I_{\text{out}} = \frac{P_{\text{out}}}{V_{\text{out}}} = \frac{120}{48} = \boxed{2.5 \, \text{A}}
+\]
+
+\section*{3. Output Resistance (\( R_{\text{out}} \))}
+\[
+R_{\text{out}} = \frac{V_{\text{out}}}{I_{\text{out}}} = \frac{48}{2.5} = \boxed{19.2 \, \Omega}
+\]
+
+\section*{4. Inductor Ripple Current (\( \Delta I_L \))}
+\begin{align*}
+\text{Average Inductor Current:} \quad I_{L_{\text{avg}}} &= \frac{I_{\text{out}}}{1 - D} = \frac{2.5}{1 - 0.75} = 10 \, \text{A} \\
+\text{Ripple Current:} \quad \Delta I_L &= 0.3 \times I_{L_{\text{avg}}} = 0.3 \times 10 = \boxed{3 \, \text{A}} \\
+\text{Max/Min Current:} \quad I_{L_{\text{max}}} &= I_{L_{\text{avg}}} + \frac{\Delta I_L}{2} = \boxed{11.5 \, \text{A}} \\
+I_{L_{\text{min}}} &= I_{L_{\text{avg}}} - \frac{\Delta I_L}{2} = \boxed{8.5 \, \text{A}}
+\end{align*}
+
+\section*{5. Output Capacitor (\( C \))}
+\begin{align*}
+\Delta V_{\text{out}} &= 0.01 \times V_{\text{out}} = 0.01 \times 48 = \boxed{0.48 \, \text{V}} \\
+C &= \frac{I_{\text{out}} \cdot D}{f_s \cdot \Delta V_{\text{out}}} = \frac{2.5 \times 0.75}{100,\!000 \times 0.48} \\
+&= \boxed{39.06 \, \mu\text{F} \, (\text{Use } 47 \, \mu\text{F}, 63 \, \text{V})}
+\end{align*}
+
+\section*{6. Inductor (\( L \))}
+\[
+L = \frac{V_{\text{in}} \cdot D}{f_s \cdot \Delta I_L} = \frac{12 \times 0.75}{100,\!000 \times 3} = \boxed{30 \, \mu\text{H} \, (\text{Use } 33 \, \mu\text{H})}
+\]
+
+\section*{7. MOSFET Selection}
+\begin{itemize}[label=$\bullet$]
+    \item Voltage Rating: \( \geq 48 \, \text{V} \) (Choose \( 60 \, \text{V} \) or \( 100 \, \text{V} \))
+    \item Current Rating: \( \geq 11.5 \, \text{A} \) (Choose \( \geq 15 \, \text{A} \))
+    \item Example: \textbf{IRF540N} (\( 100 \, \text{V}, 33 \, \text{A} \))
+\end{itemize}
+
+\section*{8. Diode Selection}
+\begin{itemize}[label=$\bullet$]
+    \item Reverse Voltage: \( \geq 48 \, \text{V} \) (Choose \( 60 \, \text{V} \) or \( 100 \, \text{V} \))
+    \item Current Rating: \( \geq 2.5 \, \text{A} \) (Peak \( \geq 11.5 \, \text{A} \))
+    \item Example: \textbf{STPS20H100CT} (\( 100 \, \text{V}, 20 \, \text{A} \) Schottky)
+\end{itemize}
+
+\section*{Component Summary}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Value/Part} & \textbf{Specification} \\
+\midrule
+Inductor & \( 33 \, \mu\text{H} \) & Saturation current \( \geq 12 \, \text{A} \) \\
+Capacitor & \( 47 \, \mu\text{F}, 63 \, \text{V} \) & Low ESR \\
+MOSFET & IRF540N & \( 100 \, \text{V}, 33 \, \text{A} \) \\
+Diode & STPS20H100CT & \( 100 \, \text{V}, 20 \, \text{A} \) Schottky \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}
